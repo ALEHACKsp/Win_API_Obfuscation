@@ -33,6 +33,9 @@
     <ClInclude Include="t1ha\t1ha.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
+    <ClInclude Include="Config.h">
+      <Filter>Исходные файлы</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="WinAPIObfuscation.cpp">

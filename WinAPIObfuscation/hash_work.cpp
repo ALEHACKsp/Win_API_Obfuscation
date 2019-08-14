@@ -2,6 +2,7 @@
 #pragma comment(lib, "t1ha-static.lib")
 
 #include "PointerHashFunc.h"
+#include "Config.h"
 #include "export_work.h"
 #include <string>
 
@@ -16,7 +17,7 @@ HANDLE hash_CreateFileA(
 {
 	const auto lenSeed = 11;
 
-	const auto _hash = t1ha0("CreateFileA", lenSeed, lenSeed);
+	const auto _hash = t1ha0("CreateFileA", strlen("CreateFileA"), STRONG_SEED);
 
 	temp_CreateFile = static_cast<HANDLE(WINAPI*)(LPCSTR,
 		DWORD,
@@ -24,7 +25,7 @@ HANDLE hash_CreateFileA(
 		LPSECURITY_ATTRIBUTES,
 		DWORD,
 		DWORD,
-		HANDLE)>(get_api(_hash, "kernel32.dll", lenSeed, lenSeed));
+		HANDLE)>(get_api(_hash, "kernel32.dll", strlen("CreateFileA"), STRONG_SEED));
 
 	return temp_CreateFile(file_name, access, share_mode, security, creation_disposition, flags, template_file);
 }

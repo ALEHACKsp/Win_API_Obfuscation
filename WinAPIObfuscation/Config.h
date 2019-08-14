@@ -1,0 +1,2 @@
+#pragma once
+#define STRONG_SEED 10376313370251892926

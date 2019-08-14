@@ -162,6 +162,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="C.h" />
+    <ClInclude Include="Config.h" />
     <ClInclude Include="export_work.h" />
     <ClInclude Include="hash_work.h" />
     <ClInclude Include="Helpers.h" />
