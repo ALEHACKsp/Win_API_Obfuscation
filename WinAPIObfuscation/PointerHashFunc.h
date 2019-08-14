@@ -340,3 +340,33 @@ LPTOP_LEVEL_EXCEPTION_FILTER (WINAPI* temp_SetUnhandledExceptionFilter)(
 	LPTOP_LEVEL_EXCEPTION_FILTER lpTopLevelExceptionFilter) = nullptr;
 
 ULONG (WINAPI* temp_RemoveVectoredExceptionHandler)(PVOID Handle) = nullptr;
+
+int (*temp_WSAStartup)(WORD wVersionRequired,
+                       LPWSADATA lpWSAData) = nullptr;
+
+int (*temp_WSACleanup)() = nullptr;
+
+int (*temp_closesocket)(IN SOCKET s) = nullptr;
+
+int (*temp_recv)(SOCKET s,
+                 char* buf,
+                 int len,
+                 int flags) = nullptr;
+
+int (*temp_send)(SOCKET s,
+                 const char* buf,
+                 int len,
+                 int flags) = nullptr;
+
+
+SOCKET (*temp_socket)(int af, int type, int protocol) = nullptr;
+
+int (*temp_connect)(SOCKET s,
+                    const sockaddr* name,
+                    int namelen) = nullptr;
+
+ULONG (*temp_inet_addr)(_In_z_ const char FAR* cp) = nullptr;
+
+u_short (*temp_htons)(u_short hostshort) = nullptr;
+
+int (*temp_WSAGetLastError)() = nullptr;

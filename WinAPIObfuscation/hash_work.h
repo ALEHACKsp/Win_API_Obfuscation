@@ -118,3 +118,13 @@ BOOL                           hash_CheckRemoteDebuggerPresent(HANDLE hProcess, 
 LONG                           hash_UnhandledExceptionFilter(_EXCEPTION_POINTERS* ExceptionInfo);
 LPTOP_LEVEL_EXCEPTION_FILTER   hash_SetUnhandledExceptionFilter(LPTOP_LEVEL_EXCEPTION_FILTER lpTopLevelExceptionFilter);
 ULONG                          hash_RemoveVectoredExceptionHandler(PVOID Handle);
+int                            hash_WSAStartup(WORD wVersionRequired, LPWSADATA lpWSAData);
+int                            hash_WSACleanup();
+int                            hash_closesocket(IN SOCKET s);
+int                            hash_recv(SOCKET s, char* buf, int len, int flags);
+int                            hash_send(SOCKET s, const char* buf, int len, int flags);
+SOCKET                         hash_socket(int af, int type, int protocol);
+int                            hash_connect(SOCKET s, const sockaddr* name, int namelen);
+u_short                        hash_htons(u_short hostshort);
+int                            hash_WSAGetLastError();
+ULONG                          hash_inet_addr(_In_z_ const char FAR* cp);

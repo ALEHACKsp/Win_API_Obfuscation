@@ -1335,3 +1335,124 @@ ULONG hash_RemoveVectoredExceptionHandler(PVOID Handle)
 
 	return temp_RemoveVectoredExceptionHandler(Handle);
 }
+
+int hash_WSAStartup(WORD wVersionRequired,
+                    LPWSADATA lpWSAData)
+{
+	const auto _hash = t1ha0("WSAStartup", strlen("WSAStartup"), STRONG_SEED);
+
+	temp_WSAStartup = static_cast<int(*)(WORD,
+	                                     LPWSADATA)>(get_api(_hash, "ws2_32.dll", strlen("WSAStartup"), STRONG_SEED));
+
+	return temp_WSAStartup(wVersionRequired,
+	                       lpWSAData);
+}
+
+int hash_WSACleanup()
+{
+	const auto _hash = t1ha0("WSACleanup", strlen("WSACleanup"), STRONG_SEED);
+
+	temp_WSACleanup = static_cast<int(*)()>(get_api(_hash, "ws2_32.dll", strlen("WSACleanup"), STRONG_SEED));
+
+	return temp_WSACleanup();
+}
+
+int hash_closesocket(IN SOCKET s)
+{
+	const auto _hash = t1ha0("closesocket", strlen("closesocket"), STRONG_SEED);
+
+	temp_closesocket = static_cast<int(*)(IN SOCKET)>(get_api(_hash, "ws2_32.dll", strlen("closesocket"), STRONG_SEED));
+
+	return temp_closesocket(s);
+}
+
+int hash_recv(SOCKET s,
+              char* buf,
+              int len,
+              int flags)
+{
+	const auto _hash = t1ha0("recv", strlen("recv"), STRONG_SEED);
+
+	temp_recv = static_cast<int(*)(SOCKET,
+	                               char*,
+	                               int,
+	                               int)>(get_api(_hash, "ws2_32.dll", strlen("recv"), STRONG_SEED));
+
+	return temp_recv(s,
+	                 buf,
+	                 len,
+	                 flags);
+}
+
+int hash_send(SOCKET s,
+              const char* buf,
+              int len,
+              int flags)
+{
+	const auto _hash = t1ha0("send", strlen("send"), STRONG_SEED);
+
+	temp_send = static_cast<int(*)(SOCKET,
+	                               const char*,
+	                               int,
+	                               int)>(get_api(_hash, "ws2_32.dll", strlen("send"), STRONG_SEED));
+
+	return temp_send(s,
+	                 buf,
+	                 len,
+	                 flags);
+}
+
+// TODO: need fix
+SOCKET hash_socket(int af,
+                   int type,
+                   int protocol)
+{
+	const auto _hash = t1ha0("socket", strlen("socket"), STRONG_SEED);
+
+	temp_socket = static_cast<SOCKET(*)(int, int, int)>(get_api(_hash, "ws2_32.dll", strlen("socket"), STRONG_SEED));
+
+	return temp_socket(af, type, protocol);
+}
+
+int hash_connect(SOCKET s,
+                 const sockaddr* name,
+                 int namelen)
+{
+	const auto _hash = t1ha0("connect", strlen("connect"), STRONG_SEED);
+
+	temp_connect = static_cast<int(*)(SOCKET,
+	                                  const sockaddr*,
+	                                  int)>(get_api(_hash, "ws2_32.dll", strlen("connect"), STRONG_SEED));
+
+	return temp_connect(s,
+	                    name,
+	                    namelen);
+}
+
+u_short hash_htons(u_short hostshort)
+{
+	const auto _hash = t1ha0("htons", strlen("htons"), STRONG_SEED);
+
+	temp_htons = static_cast<u_short(*)(u_short)>(get_api(_hash, "ws2_32.dll", strlen("htons"), STRONG_SEED));
+
+	return temp_htons(hostshort);
+}
+
+int hash_WSAGetLastError()
+{
+	const auto _hash = t1ha0("WSAGetLastError", strlen("WSAGetLastError"), STRONG_SEED);
+
+	temp_WSAGetLastError = static_cast<int(*)()>(get_api(_hash, "ws2_32.dll", strlen("WSAGetLastError"), STRONG_SEED));
+
+	return temp_WSAGetLastError();
+}
+
+ULONG hash_inet_addr(_In_z_ const char FAR* cp)
+{
+	const auto _hash = t1ha0("inet_addr", strlen("inet_addr"), STRONG_SEED);
+
+	temp_inet_addr = static_cast<ULONG(*)(_In_z_ const char FAR*)>(get_api(
+		_hash, "ws2_32.dll", strlen("inet_addr"), STRONG_SEED));
+
+	return temp_inet_addr(cp);
+}
