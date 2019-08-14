@@ -1,5 +1,4 @@
 #pragma once
-#define _WIN32_WINNT 0x0400
 #include "C.h"
 #include <consoleapi2.h>
 #include <cstdio>
@@ -14,11 +13,11 @@ DWORD WINAPI thread_function(LPVOID lpParameter)
 	}
 }
 
-VOID CALLBACK apc_function_1(ULONG_PTR dwParam)
-{
-	auto obj = (C*)dwParam;
-	obj->do_something();
-}
+//VOID CALLBACK apc_function_1(ULONG_PTR dwParam)
+//{
+//	auto obj = (C*)dwParam;
+//	obj->do_something();
+//}
 
 typedef struct _MYDATA
 {

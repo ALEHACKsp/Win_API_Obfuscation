@@ -22,4 +22,4 @@ struct LDR_MODULE
 	UNICODE_STRING dllname;
 };
 
-LPVOID get_api(DWORD api_hash, LPCSTR module, int len, unsigned int seed);
+LPVOID get_api(uint64_t api_hash, LPCSTR module, const uint64_t seed);

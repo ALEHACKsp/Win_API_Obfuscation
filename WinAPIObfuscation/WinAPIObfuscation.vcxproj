@@ -76,6 +76,7 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
+    <LibraryPath>C:\Users\Administrator\Desktop\git\Win_API_Obfuscation\WinAPIObfuscation\t1ha\x64\Debug\t1ha-static;$(VC_LibraryPath_x64);$(WindowsSDK_LibraryPath_x64);$(NETFXKitsDir)Lib\um\x64</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
@@ -163,13 +164,12 @@
     <ClInclude Include="export_work.h" />
     <ClInclude Include="hash_work.h" />
     <ClInclude Include="Helpers.h" />
-    <ClInclude Include="MurmurHash2A.h" />
     <ClInclude Include="PointerHashFunc.h" />
+    <ClInclude Include="t1ha\t1ha.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="export_work.cpp" />
     <ClCompile Include="hash_work.cpp" />
-    <ClCompile Include="MurmurHash2A.cpp" />
     <ClCompile Include="WinAPIObfuscation.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

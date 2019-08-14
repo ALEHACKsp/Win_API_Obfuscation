@@ -1,4 +1,4 @@
-﻿#include "MurmurHash2A.h"
+﻿#include "t1ha/t1ha.h"
 #include "hash_work.h"
 #include "export_work.h"
 
@@ -13,7 +13,7 @@ static HMODULE hash_LoadLibraryA(__in LPCSTR file_name)
 	return temp_LoadLibraryA(file_name);
 }
 
-static LPVOID parse_export_table(HMODULE module, DWORD api_hash, int len, unsigned int seed)
+static LPVOID parse_export_table(HMODULE module, uint64_t api_hash, const uint64_t seed)
 {
 	PIMAGE_DOS_HEADER img_dos_header;
 	PIMAGE_NT_HEADERS img_nt_header;
@@ -38,7 +38,12 @@ static LPVOID parse_export_table(HMODULE module, DWORD api_hash, int len, unsign
 	{
 		api_name = (PCHAR)((DWORD_PTR)img_dos_header + rva_name[i]);
 
-		const int get_hash = MurmurHash2A(api_name, len, seed);
+		const uint64_t get_hash = t1ha0(api_name, strlen(api_name), seed);
+
+		if(strcmp("LoadLibraryA", (const char*)api_name) == 0)
+		{
+			int debug_me = 3;
+		}
 
 		if (api_hash == get_hash)
 		{
@@ -53,7 +58,7 @@ static LPVOID parse_export_table(HMODULE module, DWORD api_hash, int len, unsign
 	return func_find;
 }
 
-LPVOID get_api(DWORD api_hash, LPCSTR module, int len, unsigned int seed)
+LPVOID get_api(uint64_t api_hash, LPCSTR module, const uint64_t seed)
 {
 	HMODULE krnl32, hDll;
 	LPVOID api_func;
@@ -94,10 +99,10 @@ LPVOID get_api(DWORD api_hash, LPCSTR module, int len, unsigned int seed)
 	krnl32 = static_cast<HMODULE>(mdl->base);
 
 	//Получаем адрес функции LoadLibraryA
-	const int api_hash_LoadLibraryA = MurmurHash2A("LoadLibraryA", 12, 10);
-	temp_LoadLibraryA = static_cast<HMODULE(WINAPI*)(LPCSTR)>(parse_export_table(krnl32, api_hash_LoadLibraryA, 12, 10));
+	const int api_hash_LoadLibraryA = t1ha0("LoadLibraryA", 13, 13);
+	temp_LoadLibraryA = static_cast<HMODULE(WINAPI*)(LPCSTR)>(parse_export_table(krnl32, api_hash_LoadLibraryA, seed));
 	hDll = hash_LoadLibraryA(module);
 
-	api_func = static_cast<LPVOID>(parse_export_table(hDll, api_hash, len, seed));
+	api_func = static_cast<LPVOID>(parse_export_table(hDll, api_hash, seed));
 	return api_func;
 }
