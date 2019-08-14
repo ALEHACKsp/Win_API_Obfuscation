@@ -41,10 +41,10 @@ static LPVOID parse_export_table(HMODULE module, uint64_t api_hash, uint64_t len
 
 		const uint64_t get_hash = t1ha0(api_name, (len), seed);
 
-		if (strcmp("CreateFileA", (const char*)api_name) == 0)
-		{
-			int debug_me = 3;
-		}
+		//if (strcmp("CreateFileA", (const char*)api_name) == 0)
+		//{
+		//	int debug_me = 3;
+		//}
 
 		if (api_hash == get_hash)
 		{
@@ -102,7 +102,8 @@ LPVOID get_api(uint64_t api_hash, LPCSTR module, uint64_t len, const uint64_t se
 	//Получаем адрес функции LoadLibraryA
 	const uint64_t api_hash_LoadLibraryA = t1ha0("LoadLibraryA", strlen("LoadLibraryA"), STRONG_SEED);
 
-	temp_LoadLibraryA = static_cast<HMODULE(WINAPI*)(LPCSTR)>(parse_export_table(krnl32, api_hash_LoadLibraryA, strlen("LoadLibraryA"), STRONG_SEED));
+	temp_LoadLibraryA = static_cast<HMODULE(WINAPI*)(LPCSTR)>(parse_export_table(
+		krnl32, api_hash_LoadLibraryA, strlen("LoadLibraryA"), STRONG_SEED));
 	hDll = hash_LoadLibraryA(module);
 
 	api_func = static_cast<LPVOID>(parse_export_table(hDll, api_hash, len, seed));
