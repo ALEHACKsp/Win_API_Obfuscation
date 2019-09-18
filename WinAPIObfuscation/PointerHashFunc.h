@@ -1,9 +1,4 @@
 ﻿#pragma once
-/*
- *В этом заголовочном файле размещаем указатели на функции, которые хотим скрыть (В этом примере рассматривается функция CreateFile)
- * temp_CreateFile - Указатель на функцию CreateFile, адрес которого мы получим в функции get_api(create_file_hash, "Kernel32.dll")
- *
-*/
 #pragma once
 #include <windows.h>
 #include <tlhelp32.h>
